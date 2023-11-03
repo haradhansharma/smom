@@ -11,6 +11,8 @@ theme
 db.sqlite3
 config/settings
 config/wsgi.py
+config/wwsgi.py
+
 
 config/bk_settings
 branding
