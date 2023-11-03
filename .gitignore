@@ -10,6 +10,8 @@ theme
 .DS_Store  
 db.sqlite3
 config/settings
+config/wsgi.py
+
 config/bk_settings
 branding
 cache/*
