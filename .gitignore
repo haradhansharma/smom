@@ -14,7 +14,7 @@ config/wsgi.py
 config/wwsgi.py
 
 
-config/bk_settings
+config/bbk_settings.py
 branding
 cache/*
 !cache/.gitkeep
