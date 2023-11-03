@@ -84,3 +84,30 @@ h6,
         font-size: 18px
     }
 }
+
+@media (max-width: 767px) {
+    /* Apply styles for small screens (xs to md) */
+    #google_translate_element {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+        text-align: center;
+        background: aqua;
+        padding: 5px;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Apply styles for medium and larger screens (lg and xl) */
+    #google_translate_element {
+        position: fixed;
+        top: 90px;      
+        transform: translate(0%, 0%);
+        z-index: 10;
+        right: 0;
+        background: aqua;
+        padding: 5px;
+    }
+}
