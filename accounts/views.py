@@ -404,7 +404,7 @@ def dashboard(request):
 
     
     
-@login_required
+
 def home(request):
     template = "registration/home.html"
     # users = User.objects.all().order_by('-date_joined')
