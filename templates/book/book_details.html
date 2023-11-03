@@ -1,0 +1,67 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block hero %}
+    <header class="masthead2" style="background-image:url('/static/assets/img/intro-bg.jpg');"> 
+            <div class="container">
+                <div class="row d-flex g-3 ">                    
+                    <div class="col-lg-12 mx-auto text-center pt-5">                  
+                        <h1>{{site_data.title}}</h1>
+                    </div>                    
+                </div>
+            </div>
+
+    </header>
+    {% endblock %}
+
+{% block body %}
+
+<section class="p-5 section">
+  <div class="container">
+      <div class="row justify-content-center g-2">
+        <div class="col-8">
+            <h2 class="card-title">{% if book.pre_order_open %}Pre-Order Open{% else %}{{book.title}}{% endif %}</h2>
+            <h3 class="text-primary">Pranami:<small class="fw-light"> {{book.price}} BDT</small></h3>
+            <img src="{{ book.main_image.url }}" class="img-fluid rounded-start" alt="{{book.title}}">
+        </div>
+        <div class="col-8 text-start">
+            <div id = "book{{book.id}}">
+                
+                <h5>Fillup the form below to place the order</h5>
+                <form class="row g-2 justify-content-center align-items-center" hx-post="{{book.get_buy_link}}" hx-target="#book{{book.id}}" hx-swap="innerHTML">
+                    {% csrf_token %}
+                    {% if user_form.non_field_errors %} 
+                    <div class="text-danger">                                              
+                        {{ user_form.non_field_errors }}                                          
+                    </div>   
+                    {% endif %}  
+                    {% for field in quantity_form %}  
+                        <div class="col-12 ">
+                            <div class="{% if field.name == "phone" %}input-group{% else %}form-floating text-dark{% endif %}">
+                                {{ field }}
+                                {% if field.name != "phone" %}
+                                <label class="mb-2 text-muted"  for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% endif %}
+                            </div>
+                            <span class="text-error invalid-feedback">{{ field.errors }}</span>
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                    {% endfor %}
+                    <input type="hidden" name="form_name" value="quantity_form">                         
+                    <input class="btn btn-primary btn-lg btn-default" type="submit" value="{% if book.pre_order_open %}Place Pre Order{% else %}Place Order{% endif %}"/>
+     
+                </form>   
+                <div class="mt-4">  
+                    <h5 class="border-bottom">About the Book</h5>
+                    {{book.description|safe}}                     
+                </div>
+            </div>
+        </div>
+          
+        
+
+      </div>
+  </div>
+</section>
+
+
+  {% endblock %}

@@ -1,0 +1,249 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block hero %}
+    <header class="masthead2" style="background-image:url('/static/assets/img/intro-bg.jpg');">
+ 
+            <div class="container">
+                <div class="row d-flex g-3 ">                    
+                    <div class="col-lg-12 mx-auto text-center pt-5">                  
+                      <h1>{{site_data.title}}</h1>
+                    </div>                    
+                </div>
+            </div>
+
+    </header>
+    {% endblock %}
+
+{% block body %}
+
+<section class="p-5 section">
+  <div class="container">
+      <div class="row justify-content-center align-items-center g-3">
+       
+            
+            
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mx-auto">
+                <div class="text-center">
+                    {% if user.profile.avatar %}
+                        <div class="d-block mx-auto mb-4 position-relative ">
+                            <img class="img-fluid rounded-circle shadow" src="{{ user.avatar }}" alt="{{user.get_full_name}}" title="{{user.get_full_name}}" width="250px" height="250px">   
+                            <a class="position-absolute top-50 end-0 translate-middle rounded-circle bg-light btn" href="{% url 'accounts:delete_avatar' %}">X</a> 
+                        </div>  
+                    {% else %}
+                        <form class="card p-5 mb-5 overflow-hidden" style="width: 300px;" method="post" id="avatar_form" action="" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <div class="">
+                                <div class="form-floating">
+                                    {{ avatar_form.avatar }}                   
+                                </div>
+                                <span class="text-error invalid-feedback">{{ avatar_form.avatar.errors  }}</span>
+                            </div>   
+                            <input class="btn btn-primary" name="avatar_form" type="submit"  value="Upload">                 
+                        </form> 
+                    {% endif %}                   
+                </div>
+            </div>
+
+            <div class="col-12 d-flex flex-column justify-content-between order-2 order-lg-1">
+                <div class="advance-tab-bottom">
+                    <div class="advance-tab-button advance-tab-button-1">
+                        <ul class="nav nav-tabs tab-button-list" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a href="#" class="nav-link tab-button tab-with-icon bg-color-white-off active" id="case-tab" data-bs-toggle="tab" data-bs-target="#case" role="tab" aria-controls="case" aria-selected="true">
+
+                                    <div class="tab">
+                                        <div class="icon">
+                                            <i class="feather-zap"></i>
+                                        </div>
+                                        <div class="content">
+                                            <h4 class="title">Account Information</h4>
+                                            <p class="description">Edit or Update Account information</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <a href="#" class="nav-link tab-button tab-with-icon bg-color-white-off" id="casetabtwo-tab" data-bs-toggle="tab" data-bs-target="#casetabtwo" role="tab" aria-controls="casetabtwo" aria-selected="false">
+                                    <div class="tab">
+                                        <div class="icon">
+                                            <i class="feather-zap"></i>
+                                        </div>
+                                        <div class="content">
+                                            <h4 class="title">Profile Information</h4>
+                                            <p class="description">Edit or Update Profile Information</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start tab Content  -->
+            <div class="col-12 order-1 order-lg-2">
+                <div class="tab-content">
+                    <div class="tab-pane fade advance-tab-content-1 bg-transparent radius active show" id="case" role="tabpanel" aria-labelledby="case-tab">
+                        <form method="post" id="user_form" action=""  class="row g-2 justify-content-center align-items-center">                         
+                            {% csrf_token %}
+                            {% if user_form.non_field_errors %} 
+                                <div class="text-danger">                                              
+                                    {{ user_form.non_field_errors }}                                          
+                                </div>   
+                            {% endif %} 
+
+                            <div class="col-md-6 ">
+                                <div class="form-floating">
+                                    {{ user_form.username }}
+                                    <label class="mb-2 text-muted"  for="{{ user_form.username.id_for_label }}">{{ user_form.username.label }}</label>
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.username.errors }}</span>
+                                <p>{{ user_form.username.help_text }}</p>
+                            </div>
+    
+                            <div class="col-md-6 ">
+                                <div class="form-floating">
+                                    {{ user_form.first_name }}
+                                    <label class="mb-2 text-muted" for="{{ user_form.first_name.id_for_label }}">{{ user_form.first_name.label }}</label>
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.first_name.errors  }}</span>
+                                <p>{{ user_form.first_name.help_text }}</p>
+                            </div>
+    
+                            <div class="col-md-6 ">
+                                <div class="form-floating">
+                                    {{ user_form.last_name }}
+                                    <label class="mb-2 text-muted" for="{{ user_form.last_name.id_for_label }}">{{  user_form.last_name.label }}</label>
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.last_name.errors  }}</span>
+                                <p>{{ user_form.last_name.help_text }}</p>
+                            </div>
+    
+                            <div class="col-md-6 ">
+                                <div class="form-floating">
+                                    {{ user_form.email }}
+                                    <label class="mb-2 text-muted" for="{{ user_form.email.id_for_label }}">{{ user_form.email.label }}</label>
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.email.errors }}</span>
+                                <p>{{ user_form.email.help_text }}</p>
+                            </div>  
+    
+                            <div class="col-md-12 ">
+                                <div class="input-group">
+                                    {{ user_form.phone }}                                                               
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.phone.errors }}</span>
+                                <p>{{ user_form.phone.help_text }}</p>
+                            </div>
+    
+                            <div class="col-md-12 ">
+                                <div class="form-floating">
+                                    {{ user_form.organization }}
+                                    <label class="mb-2 text-muted"
+                                        for="{{ user_form.organization.id_for_label }}">{{ user_form.organization.label }}</label>
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.organization.errors  }}</span>
+                                <p>{{ user_form.organization.help_text }}</p>
+                            </div>  
+                            
+                            <div class="col-md-12 ">
+                                 
+                                <div class="form-floating">
+                                    {{ user_form.interest_in }} 
+                                    <label class="mb-2 text-muted"
+                                        for="{{ user_form.interest_in.id_for_label }}">{{ user_form.interest_in.label }}</label>
+                                                                                                 
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.interest_in.errors }}</span>
+                                <p>{{ user_form.interest_in.help_text }}</p>
+                            </div>
+
+                            <div class="col-md-12 ">
+                                <div class="form-floating">
+                                    {{ user_form.in_workshops }}    
+                                    <label class="mb-2 text-muted"
+                                        for="{{ user_form.in_workshops.id_for_label }}">{{ user_form.in_workshops.label }}</label>
+                                                                                               
+                                </div>
+                                <span class="text-error invalid-feedback">{{ user_form.in_workshops.errors }}</span>
+                                <p>{{ user_form.in_workshops.help_text }}</p>
+                            </div>
+                            
+                            
+                            <div class="col-12">
+                                <input class="btn btn-primary w-100 py-3" name="user_form" type="submit" value="Update">
+                            </div>                               
+                      
+                        </form>
+                    </div>
+                    <div class="tab-pane fade advance-tab-content-1 bg-transparent radius" id="casetabtwo" role="tabpanel" aria-labelledby="casetabtwo-tab">
+                        <form method="post" id="profile_form" action="" class="row g-2 justify-content-center align-items-center">
+                        
+                                {% csrf_token %}                    
+                       
+                                {% if profile_form.non_field_errors %} 
+                                    <div class="text-danger">                                              
+                                        {{ profile_form.non_field_errors }}                                          
+                                    </div>   
+                                {% endif %} 
+
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        {{ profile_form.about }}
+                                        <label class="mb-2 text-muted" for="{{ profile_form.about.id_for_label }}">{{ profile_form.about.label }}</label>
+                                    </div>
+                                    <span class="text-error invalid-feedback">{{ profile_form.about.errors }}</span>
+                                    <p>{{ profile_form.about.help_text }}</p>
+                                </div>
+        
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ profile_form.location }}
+                                        <label class="mb-2 text-muted"
+                                            for="{{ profile_form.location.id_for_label }}">{{ profile_form.location.label }}</label>
+                                    </div>
+                                    <span class="text-error invalid-feedback">{{ profile_form.location.errors  }}</span>
+                                    <p>{{ profile_form.location.help_text }}</p>
+                                </div>
+        
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ profile_form.birthdate }}
+                                        <label class="mb-2 text-muted"
+                                            for="{{ profile_form.birthdate.id_for_label }}">{{ profile_form.birthdate.label }}</label>
+                                    </div>
+                                    <span class="text-error invalid-feedback">{{ profile_form.birthdate.errors }}</span>
+                                    <p>{{ profile_form.birthdate.help_text }}</p>
+                                </div>
+                                    
+                                    
+        
+                                <div class="col-12">
+                                    <input class="btn btn-primary w-100 py-3" name="profile_form"
+                                        form="profile_form" type="submit" value="Update">
+                                </div>
+                              
+                                              
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End tab Content  -->
+              
+
+
+
+   
+      </div>
+  </div>
+</section>
+
+
+  {% endblock %}
+
+
+
+
+

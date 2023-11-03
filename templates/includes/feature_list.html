@@ -1,0 +1,68 @@
+<form hx-post="{% url 'home:home' %}" hx-target="#feature_list" hx-swap="innerHTML" class="row g-3 text-start pb-4">
+    {% csrf_token %}
+
+
+
+    {{ form.non_field_errors }}  
+    <div class="col-md-12">
+        {{ form.wated_title.errors }}
+        <label for="{{ form.wated_title.id_for_label }}">{{ form.wated_title.label_tag }}</label>
+        {{ form.wated_title }}
+    </div>
+
+    <div class="col-md-12">
+        {{ form.wanted.errors }}
+        <label for="{{ form.wanted.id_for_label }}">{{ form.wanted.label_tag }}</label>
+        {{ form.wanted }}
+    </div>
+
+
+    <div class="col-md-6">
+        {{ form.wanted_name.errors }}
+        <label for="{{ form.wanted_name.id_for_label }}">{{ form.wanted_name.label_tag }}</label>
+        {{ form.wanted_name }}
+    </div>
+
+    <div class="col-md-6">
+        {{ form.wanted_by.errors }}
+        <label for="{{ form.wanted_by.id_for_label }}">{{ form.wanted_by.label_tag }}</label>
+        {{ form.wanted_by }}
+    </div>
+
+    <div class="col-md-12 text-center">
+        {{ form.captcha.errors }}
+        <label for="{{ form.captcha.id_for_label }}">{{ form.captcha.label_tag }}</label>
+        {{ form.captcha }}
+    </div>
+    <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+<p>We genuinely appreciate your input and support. Together, we can spread the light of knowledge and spirituality far and wide, 
+    keeping Babamani's legacy alive.
+</p>
+ 
+<div class="pb-2 text-center">
+    <h2>Latest Feature Requests</h2>                       
+</div>    
+
+<div class = "pb-4">
+    <div class="list-group">
+        {% for feature in features %}    
+        <div class="list-group-item">
+            <h4 class="mb-1">"{{feature.wated_title}}" by {{feature.wanted_name}}</h4>
+            {{feature.wanted}}
+        </div>  
+        {% endfor %}
+    </div>    
+</div>
+<div class="pb-2">                    
+    <p>Your valuable suggestions and feature requests are the driving force behind the continuous improvement of 
+        Shankar Math and Mission's online presence. We deeply appreciate your contributions to help us create a more 
+        enriching experience for all our visitors. Here are the latest feature requests submitted by our community:
+    </p>          
+</div>
+<div class="text-center">
+<a class="btn btn-primary btn-lg btn-default"  href="#featurform">Add your suggestions</a>
+</div>

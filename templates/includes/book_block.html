@@ -1,0 +1,62 @@
+<section class="download-section content-section {{content_section2}}" id="book" style="background-image:url('/static/assets/img/gitaback.jpg');">
+    <div class="container">
+        <div class="col-lg-12 mx-auto">
+          <h2 class="text-center">Book Selling Section</h2>
+          <p>
+            Be among the first to experience the profound wisdom within our carefully selected spiritual books. 
+            We are currently accepting pre-orders for the following titles:
+          </p>
+            {% for book in books %}
+            <div class="card mb-3">
+                <div  class="row g-0 align-items-center">
+                  <div class="col-md-6">
+                    <img src="{{ book.main_image.url }}" class="img-fluid rounded-start" alt="{{book.title}}">
+                  </div>
+                  <div class="col-md-6 text-start">
+                    <div id = "book{{book.id}}" class="card-body">
+                      {% include 'book/buy_book.html' %}                       
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            {% endfor %}
+
+            <p>
+              By pre-ordering these books, you not only secure your copy but also play a vital role in supporting the mission's development and growth.
+            </p>
+            <p><strong>Online Store:</strong></p>
+            <p>
+              Our online store is designed to make it convenient for you to pre-order these spiritual treasures. 
+              You can easily browse our collection, add books to your pre-order, and proceed to a secure checkout process. 
+              Rest assured that your pre-orders are safe and protected.
+            </p>
+            <p><strong>Profit Allocation:</strong></p>
+            <p>
+              We believe in transparency and giving back to the community. When you pre-order a book from our store, part of the profit 
+              generated will be dedicated to the ongoing development and maintenance of this website. This ensures that we can continue to 
+              spread the teachings and philosophy of Babamani effectively.
+            </p>
+
+            <p><strong>Shipping Information:</strong></p>
+            <p>
+              We aim to make your pre-order experience as convenient as possible. Here are some key details regarding pre-order and shipping:
+            </p>
+            <p>
+              <ul>
+                <li><strong>Pre-Order Benefits:</strong> Pre-ordering a book guarantees that you will receive it as soon as it becomes available.</li>
+
+                <li><strong>Shipping Options:</strong> We offer a range of shipping options to suit your needs. Choose from standard or expedited delivery.</li>
+
+                <li><strong>Delivery Times:</strong> We strive to process and dispatch your pre-orders promptly once the books become available. Delivery times may vary based on your location and chosen shipping method.</li>
+
+                <li><strong>Shipping Costs:</strong> The cost of shipping will be calculated at checkout and may vary based on your location and order size.</li>
+              </ul>
+            </p>
+            <p>
+              Your support through pre-orders not only enriches your spiritual journey but also plays a crucial role in the mission's growth and philanthropic endeavors. 
+              Thank you for being a part of this meaningful journey.
+            </p>
+        </div>
+    </div>
+</section>

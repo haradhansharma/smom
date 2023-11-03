@@ -1,0 +1,172 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+
+    
+
+{% block hero %}
+    <header class="masthead" style="background-image:url('/static/assets/img/intro-bg.jpg');">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">                    
+                    <div class="col-lg-8 mx-auto">                          
+                        <div><img src="{{site_data.trademark}}" width="50%" /></div>
+                        <a class="btn btn-link btn-circle" role="button" href="#about"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+
+    
+    {% block body %}
+    <section class="content-section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mx-auto">  
+                    <div class="pb-2 text-center">
+                        <h2>About SankarMath - O - Mission</h2>                       
+                    </div>    
+                    <div class="pb-2">                    
+                        <p>Namaste and welcome to the digital abode of SankarMath - o - Mission, a sacred institution dedicated to the teachings and wisdom of our 
+                            revered Guru, Sri Srimat Swami Jyotiswarananda Giri Maharaj, affectionately known as Babamani. As a devoted disciple of Babamani, 
+                            it is an honor to bring you closer to his profound philosophy through this online platform.
+                        </p>          
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 mx-auto">  
+                    <div class="pb-2">
+                        <h3>Our Mission and Values</h3>                       
+                    </div>    
+                    <div class="pb-2">                    
+                        <p>Shankar Math and Mission is more than an ashram; it's a spiritual sanctuary, a place of wisdom and enlightenment. 
+                            Our mission is to propagate the divine essence of AUM and the teachings of the Bhagavad Gita.</p>
+                        <p>We follow the lineage of 
+                            great spiritual leaders, with Babamani as our guiding light. Our core values revolve around unity, spirituality, and the 
+                            pursuit of inner peace.
+                        </p>          
+                    </div>
+                </div>
+
+
+
+
+                <div id="contact" class="col-lg-6 mx-auto">
+                    <div class="pb-2">
+                        <h3>Contact Information</h3>                       
+                    </div>    
+                    <div class="pb-2">                    
+                        <p>
+                            If you have any questions or need to get in touch with us, please feel free to reach out. Your inquiries and feedback are always welcome.
+                        </p>  
+                        <p class="mb-4 text-indent-2">
+                            Email Us: <a href="mailto:info@sankarmath.org">info@sankarmath.org</a>
+                        </p>                        
+                        <p>Thank you for being a part of this sacred journey. Let us continue to walk the path of enlightenment, hand in hand, inspired by the teachings of Babamani and the great spiritual lineage we belong to.</p>
+                    </div>
+                    
+                </div>
+
+                <div id="featurform" class="col-lg-12 mx-auto"> 
+                    <div class="pb-2 text-center">
+                    <h2>Feature Request</h2>
+                    </div>
+                    <p>We believe in the power of collective wisdom and continuous improvement. Your ideas and suggestions are invaluable in enhancing 
+                        this platform and furthering Babamani's mission. We invite you to share your thoughts and requests to make this website a better 
+                        resource for all. Your insights can help us create a more enriching online experience.</p>
+                    <h4>Please use the form below to submit your feature requests or suggestions:</h4>
+                    <div id = "feature_list">
+                        {% include 'includes/feature_list.html' %}                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center download-section content-section" id="asram" style="background-image:url('static/assets/img/downloads-bg.jpg');">
+        <div class="container">
+            <div class="col-lg-12 mx-auto text-start">
+                <h2 class="text-center">Asrams</h2>
+                <strong>Overview:</strong>
+                <p>Welcome to the heart of Shankar Math and Mission, where spirituality finds its home. Our mission is not bound by boundaries, 
+                    as we stand united in the teachings of Sri Srimat Swami Jyotiswarananda Giri Maharaj, affectionately known as Babamani to his disciples. 
+                    Babamani's guru, Sri Srimat Swami Swarupananda Giri Maharaj, established this sacred Ashram on Chandranath Pahar, following the divine instructions 
+                    of his Guru, Sri Srimat Swami Brahmananda Giri Maharaj. This spiritual lineage traces its origins to the revered Swami Satyananda Maharaj, 
+                    firmly rooted in the Giri community of Adi Shankaracharya.
+                </p>
+
+                <p>Our Ashram is a sanctuary of profound spirituality, where devotees come to seek enlightenment, wisdom, and inner peace. We invite you to 
+                    explore the wisdom of the ages and the timeless teachings of our Gurus.
+                </p>
+                <strong>Add Your Ashram:</strong>
+                <p>
+                    If you represent an ashram or spiritual center that aligns with the teachings and values of Shankar Math and Mission, we invite you to add your 
+                    ashram to our directory. Please click the "Add Ashram" button below and provide us with the necessary details. We are always eager to expand our 
+                    network and connect with like-minded individuals and centers dedicated to the pursuit of spiritual knowledge.
+                </p>
+                
+                <p><a class="btn btn-primary btn-lg btn-default" href="{% url 'asrams:create_asram' %}">Add Asram</a></p>
+                <p>
+                    As we continue to expand our mission, we invite you to visit any of our ashrams to experience the transformative power of spirituality and gain a 
+                    deeper understanding of our timeless teachings. Explore these sacred spaces and the wisdom they hold, and feel free to reach out to us for any 
+                    additional information or guidance.
+                </p>
+
+                <p><a class="btn btn-primary btn-lg btn-default" href="{% url 'asrams:home' %}">Listed Asrams</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="register">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mx-auto">
+                    <h2 class="text-center">Disciple Registration</h2>
+
+                    <p>
+                        Welcome to the Disciple Registration Section of Shankar Math and Mission. We are delighted to extend our hand in spiritual 
+                        fellowship to all those who wish to join us on this enlightening journey. Becoming a disciple means embracing the profound 
+                        teachings and spiritual wisdom imparted by our revered Guru, Babamani, and becoming a part of our sacred community.
+                    </p>
+                    <p>
+                        To register as a disciple, please click the button below. We encourage you to provide us with some basic information about yourself. 
+                        This will help us better understand your interest and commitment to Babamani's teachings.
+                    </p>
+
+
+                    <p><a class="btn btn-primary btn-lg btn-default" href="{% url 'accounts:signup' %}">REGISTER</a></p>
+
+                    <p><strong>Benefits of Registration:</strong></p>
+
+                    <p>As a registered disciple of Shankar Math and Mission, you will enjoy a range of spiritual benefits, including:</p>
+                    <ul>
+                    <li>Access to spiritual resources and teachings.</li>
+                    <li>Invitations to exclusive events, satsangs, and spiritual gatherings.</li>
+                    <li>Regular updates and news related to our mission and activities.</li>
+                    <li>Opportunities to engage with a like-minded spiritual community.</li>
+                    <li>A sense of belonging to a mission that is dedicated to the propagation of AUM and the teachings of the Gita.</li>
+                    </ul>
+                    <p>Your registration will help us stay connected and share the wisdom of Babamani with you. We look forward to having you as part of our spiritual family.</p>
+
+                    <p>Please note that your information will be kept confidential and used solely for the purpose of maintaining communication with you and enhancing your spiritual journey.</p>
+
+                    <p>If you have any questions or need further assistance, please do not hesitate to contact us through our <span><a href="/#contact">Contact</a></span> path. Thank you for choosing to walk the path of spirituality with Shankar Math and Mission.</p>
+                    <p><a class="btn btn-primary btn-lg btn-default" href="{% url 'accounts:home' %}">All Registered Disciple</a></p>                  
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'includes/book_block.html' %}
+ 
+
+    
+
+
+    {% endblock %}

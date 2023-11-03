@@ -1,0 +1,36 @@
+
+<h2 class="card-title">OrderNo: {{order.id}}</h2>
+<h3 class="text-primary">Order Amount:<small class="fw-light"> {{order.amount}} BDT</small></h3>
+
+
+{% if messages %}   
+<div class="col-12 text-center">
+    <div class="alert alert-secondary shadow-soft" role="alert">                            
+        {% for message in messages %}
+        <span class="alert-inner--text">{{ message }}</span>
+        {% endfor %}                            
+    </div>                        
+</div>
+{% endif %} 
+
+
+<form hx-post="{% url 'book:book_order_payment' order.id %}" hx-target="#book{{order.book_order_items.all.first.item.id}}" hx-swap="innerHTML">
+    {% csrf_token %}
+    <div id="payment_form_container" class="mb-3">
+    {{ address_form }} 
+    </div>
+
+    <div class="mb-3">
+    <a class="btn btn-primary btn-sm btn-default" href="" hx-get="{% url 'book:get_add_address_form' %}" hx-target="#payment_form_container" hx-swap="innerHTML">Add New Address</a>
+    <a class="btn btn-primary btn-sm btn-default" href="" hx-get="{% url 'book:get_select_address_form' order.customer.id %}" hx-target="#payment_form_container" hx-swap="innerHTML">Select Address</a>
+    </div>
+    <div class="mb-3">
+    {{ payment_gateways_form.as_p }}  
+    </div>   
+
+
+ 
+    <input class="btn btn-primary btn-lg btn-default" type="submit" value="Confirm"/>
+   
+</form> 
+

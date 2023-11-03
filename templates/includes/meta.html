@@ -1,0 +1,20 @@
+<meta name="theme-style-mode" content="1"> <!-- 0 == light, 1 == dark -->
+<meta name="yandex-verification" content="0c14ceb45c140ed9" />
+<title>{{ site_data.name }} -{% block head_title %}{{ site_data.title }}{% endblock %}</title> 
+<meta name="description" content="{{ site_data.description }}">
+<meta name="author" content="{{ site_data.author }}">
+<meta property="og:title" content="{{ site_data.name }} - {{ site_data.title }}">
+<meta property="twitter:title" content="{{ site_data.name }} - {{ site_data.title }}">
+<meta property="og:description" content="{{ site_data.description }}">
+<meta property="twitter:description" content="{{ site_data.description }}">
+<meta property="og:type" content="website">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="og:image" content="{{ site_data.domain }}{{ site_data.og_image }}">
+<meta property="twitter:image" content="{{ site_data.domain }}{{ site_data.og_image }}">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
+<meta property="twitter:url" content="{{ request.build_absolute_uri }}">
+<meta name="twitter:site" content="@sankarmath-o-mission" />
+<meta name="twitter:creator" content="@sankarmath-o-mission" /> 
+<meta name="category" content="company"/> 
+<link rel="manifest" href="{% url 'webmanifest' %}">

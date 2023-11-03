@@ -1,0 +1,14 @@
+
+<h2 class="card-title">OrderNo: {{order.id}}</h2>
+<h3 class="text-primary">Order Amount:<small class="fw-light"> {{order.amount}} BDT</small></h3>
+
+{{gatway_instruction}}
+
+<form hx-post="{% url 'payment_method:rocket_manual' order.id %}" hx-target="#book{{order.book_order_items.all.first.item.id}}" hx-swap="innerHTML" hx-encoding="multipart/form-data">
+    {% csrf_token %}    
+    <div class="mb-3">
+    {{ payment_form }}  
+    </div> 
+    <input class="btn btn-primary btn-lg btn-default" type="submit" value="Place Order"/>   
+</form> 
+

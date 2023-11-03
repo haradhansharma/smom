@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load static %}
+{% load tz %}
+{% now "Y" as current_year %}
+<html data-bs-theme="light" lang="en" > 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block robotindex %}{% endblock %}
+    {% include 'includes/meta.html' %}
+
+    
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{site_data.favicon}}">    
+    
+    <!-- CSS ============================================ -->
+    
+    <link rel="stylesheet" href="{% static 'assets/css/smom.css' %}"> 
+    <script src="{% static 'assets/htmx/dist/htmx.min.js' %}"></script>
+
+    {% block extra_head %}
+    {% endblock %}    
+  </head>
+
+  <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="77">
+    {% block header %}
+ 
+    {% include 'layouts/header.html' %}
+    
+    {% endblock %}
+    {% if messages %}   
+        <div class="col-12 text-center">
+            <div class="alert alert-secondary shadow-soft" role="alert">                            
+                {% for message in messages %}
+                <span class="alert-inner--text">{{ message }}</span>
+                {% endfor %}                            
+            </div>                        
+        </div>
+    {% endif %}  
+
+
+    {% block hero %}
+        <header class="masthead" style="background-image:url('/static/assets/img/intro-bg.jpg');">
+            <div class="intro-body">
+                <div class="container">
+                    <div class="row">                    
+                        <div class="col-lg-8 mx-auto">                          
+                            <div><img src="{{site_data.trademark}}" width="50%" /></div>
+                            <a class="btn btn-link btn-circle" role="button" href="#about"><i class="fa fa-angle-double-down" aria-hidden="true"></i></a>
+                        </div>                     
+                        
+                    </div>
+                </div>
+            </div>
+        </header>
+    {% endblock %}
+
+    
+    
+    {% block body %}
+    <section class="content-section" id="about">
+        <div class="container">
+            <div class="row">
+                
+
+                <div class="col-lg-12 mx-auto">  
+                    <div class="pb-2 text-center">
+                        <h2>About SankarMath - O - Mission</h2>                       
+                    </div>    
+                    <div class="pb-2">                    
+                        <p>Namaste and welcome to the digital abode of SankarMath - o - Mission, a sacred institution dedicated to the teachings and wisdom of our 
+                            revered Guru, Sri Srimat Swami Jyotiswarananda Giri Maharaj, affectionately known as Babamani. As a devoted disciple of Babamani, 
+                            it is an honor to bring you closer to his profound philosophy through this online platform.
+                        </p>          
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 mx-auto">  
+                    <div class="pb-2">
+                        <h3>Our Mission and Values</h3>                       
+                    </div>    
+                    <div class="pb-2">                    
+                        <p>Shankar Math and Mission is more than an ashram; it's a spiritual sanctuary, a place of wisdom and enlightenment. 
+                            Our mission is to propagate the divine essence of AUM and the teachings of the Bhagavad Gita.</p>
+                        <p>We follow the lineage of 
+                            great spiritual leaders, with Babamani as our guiding light. Our core values revolve around unity, spirituality, and the 
+                            pursuit of inner peace.
+                        </p>          
+                    </div>
+
+                    
+       
+                </div>
+
+
+
+
+                <div class="col-lg-6 mx-auto">
+
+                    <div class="pb-2">
+                        <h3>Contact Information</h3>                       
+                    </div>    
+                    <div class="pb-2">                    
+                        <p>
+                            If you have any questions or need to get in touch with us, please feel free to reach out. Your inquiries and feedback are always welcome.
+                        </p>  
+                        <p class="mb-4 text-indent-2">
+                            Email Us: <a href="mailto:info@sankarmath.org">info@sankarmath.org</a>
+                        </p>
+                        
+                        <p>Thank you for being a part of this sacred journey. Let us continue to walk the path of enlightenment, hand in hand, inspired by the teachings of Babamani and the great spiritual lineage we belong to.</p>
+                    </div>
+                    
+                </div>
+
+                <div id="featurform" class="col-lg-12 mx-auto"> 
+                    <div class="pb-2 text-center">
+                    <h2>Feature Request</h2>
+                    </div>
+                    <p>We believe in the power of collective wisdom and continuous improvement. Your ideas and suggestions are invaluable in enhancing 
+                        this platform and furthering Babamani's mission. We invite you to share your thoughts and requests to make this website a better 
+                        resource for all. Your insights can help us create a more enriching online experience.</p>
+                    <h4>Please use the form below to submit your feature requests or suggestions:</h4>
+                    <div id = "feature_list">
+                        {% include 'includes/feature_list.html' %}                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center download-section content-section" id="asram" style="background-image:url('static/assets/img/downloads-bg.jpg');">
+        <div class="container">
+            <div class="col-lg-12 mx-auto text-start">
+                <h2 class="text-center">Asrams</h2>
+                <strong>Overview:</strong>
+                <p>Welcome to the heart of Shankar Math and Mission, where spirituality finds its home. Our mission is not bound by boundaries, 
+                    as we stand united in the teachings of Sri Srimat Swami Jyotiswarananda Giri Maharaj, affectionately known as Babamani to his disciples. 
+                    Babamani's guru, Sri Srimat Swami Swarupananda Giri Maharaj, established this sacred Ashram on Chandranath Pahar, following the divine instructions 
+                    of his Guru, Sri Srimat Swami Brahmananda Giri Maharaj. This spiritual lineage traces its origins to the revered Swami Satyananda Maharaj, 
+                    firmly rooted in the Giri community of Adi Shankaracharya.
+                </p>
+
+                <p>Our Ashram is a sanctuary of profound spirituality, where devotees come to seek enlightenment, wisdom, and inner peace. We invite you to 
+                    explore the wisdom of the ages and the timeless teachings of our Gurus.
+                </p>
+                <strong>Add Your Ashram:</strong>
+                <p>If you represent an ashram or spiritual center that aligns with the teachings and values of Shankar Math and Mission, we invite you to add your 
+                    ashram to our directory. Please click the "Add Ashram" button below and provide us with the necessary details. We are always eager to expand our 
+                    network and connect with like-minded individuals and centers dedicated to the pursuit of spiritual knowledge.
+                </p>
+                
+                <p><a class="btn btn-primary btn-lg btn-default" href="{% url 'asrams:create_asram' %}">Add Asram</a></p>
+                <p>As we continue to expand our mission, we invite you to visit any of our ashrams to experience the transformative power of spirituality and gain a 
+                    deeper understanding of our timeless teachings. Explore these sacred spaces and the wisdom they hold, and feel free to reach out to us for any 
+                    additional information or guidance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center content-section" id="register">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Shishya Nibondhon</h2>
+                    <p><a class="btn btn-primary btn-lg btn-default" href="#">REGISTER</a></p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center download-section content-section" id="book" style="background-image:url('static/assets/img/gitaback.jpg');">
+        <div class="container">
+            <div class="col-lg-12 mx-auto">
+                {% for book in books %}
+                <div class="card mb-3">
+                    <div  class="row g-0 align-items-center">
+                      <div class="col-md-6">
+                        <img src="{{ book.main_image.url }}" class="img-fluid rounded-start" alt="{{book.title}}">
+                      </div>
+                      <div class="col-md-6 text-start">
+                        <div id = "book{{book.id}}" class="card-body">
+                          {% include 'book/buy_book.html' %}                       
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+    {% block footer %}
+    {% include 'layouts/footer.html' %}
+    {% endblock %}
+
+
+
+ 
+
+
+    {% include 'includes/scripts.html' %}
+    {% block extra_body %}    
+    {% endblock %}
+    <script nonce="{{ CSP_NONCE }}" type="application/javascript">
+        document.body.addEventListener('htmx:configRequest', (e) => {
+            e.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+            })
+    </script>
+  </body>
+</html>

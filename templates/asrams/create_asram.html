@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block hero %}
+    <header class="masthead2" style="background-image:url('/static/assets/img/intro-bg.jpg');">
+ 
+            <div class="container">
+                <div class="row d-flex g-3 ">                    
+                    <div class="col-lg-12 mx-auto text-center pt-5">                  
+                      <h1>{{site_data.title}}</h1>
+                    </div>                    
+                </div>
+            </div>
+
+    </header>
+    {% endblock %}
+
+{% block body %}
+
+<section class="p-5 section">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-lg-6 mx-auto">              
+              <div class="pb-2">                    
+                <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  
+                  <div class="form-floating text-dark">
+                    {{ form.name }}
+                    <label for="{{ form.name.id_for_label }}">{{ form.name.label_tag }}</label>                    
+                    {{ form.name.errors }}                    
+                  </div>
+                  <p>{{ form.name.help_text }}</p>
+                  
+                  <div class="form-floating text-dark">
+                    {{ form.banner }}
+                    <label for="{{ form.banner.id_for_label }}">{{ form.banner.label_tag }}</label>                  
+                    {{ form.banner.errors }}
+                </div>
+                <p>{{ form.banner.help_text }}</p>
+                  
+
+                  <div class="form-floating text-dark">
+                    {{ form.acharya }}
+                    <label for="{{ form.acharya.id_for_label }}">{{ form.acharya.label_tag }}</label>                  
+                    {{ form.acharya.errors }}
+                    
+                  </div>
+                  <p>{{ form.acharya.help_text }}</p>
+
+                  <div class="form-floating text-dark">
+                    {{ form.street_address }}
+                    <label for="{{ form.street_address.id_for_label }}">{{ form.street_address.label_tag }}</label>                  
+                    {{ form.street_address.errors }}
+                  </div>
+                  <p>{{ form.street_address.help_text }}</p>
+
+
+                  <div class="form-floating text-dark">
+                    {{ form.city }}
+                    <label for="{{ form.city.id_for_label }}">{{ form.city.label_tag }}</label>                  
+                    {{ form.city.errors }}
+                  </div>
+                  <p>{{ form.city.help_text }}</p>
+
+
+                  <div class="form-floating text-dark">
+                    {{ form.postal_code }}
+                    <label for="{{ form.postal_code.id_for_label }}">{{ form.postal_code.label_tag }}</label>                  
+                    {{ form.postal_code.errors }}
+                  </div>
+                  <p>{{ form.postal_code.help_text }}</p>
+
+
+                  <div class="form-floating text-dark">
+                    {{ form.country }}
+                    <label for="{{ form.country.id_for_label }}">{{ form.country.label_tag }}</label>                  
+                    {{ form.country.errors }}
+                  </div>
+                  <p>{{ form.country.help_text }}</p>
+
+                  <div class="form-floating text-dark">
+                    {{ form.about }}
+                    <label for="{{ form.about.id_for_label }}">{{ form.about.label_tag }}</label>                  
+                    {{ form.about.errors }}
+                  </div>
+                  <p>{{ form.about.help_text }}</p>
+
+                  <button class="btn btn-primary btn-lg btn-default" type="submit">Submit</button>
+
+                </form>        
+              </div>
+          </div>
+          
+      </div>
+  </div>
+</section>
+
+
+
+
+
+  {% endblock %}
