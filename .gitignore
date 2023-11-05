@@ -23,6 +23,15 @@ cache/*
 logs/*
 !logs/.gitkeep
 
+media/payment_instruction/*
+!media/payment_instruction/.gitkeep
+
+media/transactions/screenshoot/*
+!media/transactions/screenshoot/.gitkeep
+
+media/asrams/banner/*
+!media/asrams/banner/.gitkeep
+
 
 staticfiles
 
