@@ -18,12 +18,12 @@
 <section class="p-5 section">
   <div class="container">
       <div class="row justify-content-center g-2">
-        <div class="col-8">
+        <div class="col-lg-8">
             <h2 class="card-title">{% if book.pre_order_open %}Pre-Order Open{% else %}{{book.title}}{% endif %}</h2>
             <h3 class="text-primary">Pranami:<small class="fw-light"> {{book.price}} BDT</small></h3>
             <img src="{{ book.main_image.url }}" class="img-fluid rounded-start" alt="{{book.title}}">
         </div>
-        <div class="col-8 text-start">
+        <div class="col-lg-8 text-start">
             <div id = "book{{book.id}}">
                 
                 <h5>Fillup the form below to place the order</h5>
