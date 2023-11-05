@@ -2,7 +2,7 @@
 <h2 class="card-title">OrderNo: {{order.id}}</h2>
 <h3 class="text-primary">Pending Amount:<small class="fw-light"> {{order.pending_amount}} BDT out of Order Amount {{order.amount}} BDT</small></h3>
 
-<form hx-post="{% url 'book:update_payment' order.id %}" hx-target="#invoice{{order.id}}" hx-swap="innerHTML" hx-encoding="multipart/form-data">
+<form hx-post="{% url 'book:update_payment' order.id %}" hx-target="#invoice{{order.id}}" hx-swap="innerHTML" hx-encoding="multipart/form-data" hx-indicator="#spinner{{order.id}}">
     {% csrf_token %}   
     {% if user_form.non_field_errors %} 
     <div class="text-danger">                                              
@@ -23,4 +23,9 @@
     {% endfor %}
 
     <input class="btn btn-primary btn-lg btn-default" type="submit" value="Place Order"/>   
+    <div id="spinner{{order.id}}" class="htmx-indicator">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
 </form> 

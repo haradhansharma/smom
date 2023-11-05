@@ -51,8 +51,13 @@
                                 <td>{{invoice.validity.date}}</td>
                                 <td>
                                     <div class="btn-group">
-                                    <a hx-get="{{invoice.update_payment_url}}" hx-target="#invoice{{invoice.order.id}}" hx-swap="innerHTML" class="btn btn-default">Update Payment</a>
+                                    <a hx-get="{{invoice.update_payment_url}}" hx-target="#invoice{{invoice.order.id}}" hx-swap="innerHTML" class="btn btn-default" hx-indicator="#spinner{{invoice.order.id}}">Update Payment</a>
                                     <a href="{{invoice.filepath.url}}" target="_blank" class="btn btn-default">View Invoice</a>
+                                    <div id="spinner{{invoice.order.id}}" class="htmx-indicator">
+                                        <div class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                          </div>
+                                    </div>
                                     </div>
                                     <div id="invoice{{invoice.order.id}}"></div>
                                 </td>

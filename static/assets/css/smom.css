@@ -111,3 +111,13 @@ h6,
         padding: 5px;
     }
 }
+
+.htmx-indicator{
+    display:none;
+}
+.htmx-request .htmx-indicator{
+    display:inline;
+}
+.htmx-request.htmx-indicator{
+    display:inline;
+}

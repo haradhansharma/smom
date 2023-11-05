@@ -14,24 +14,27 @@
 {% endif %} 
 
 
-<form hx-post="{% url 'book:book_order_payment' order.id %}" hx-target="#book{{order.book_order_items.all.first.item.id}}" hx-swap="innerHTML">
+<form hx-post="{% url 'book:book_order_payment' order.id %}" hx-target="#book{{order.book_order_items.all.first.item.id}}" hx-swap="innerHTML" hx-indicator="#spinner{{order.book_order_items.all.first.item.id}}">
     {% csrf_token %}
     <h6>Add Or Select Address</h6>
     <div id="payment_form_container" class="mb-3">
     {{ address_form }} 
     </div>
     <div class="mb-3">
-    <a class="btn btn-primary btn-sm btn-default" href="" hx-get="{% url 'book:get_add_address_form' %}" hx-target="#payment_form_container" hx-swap="innerHTML">Add New Address</a>
-    <a class="btn btn-primary btn-sm btn-default" href="" hx-get="{% url 'book:get_select_address_form' order.customer.id %}" hx-target="#payment_form_container" hx-swap="innerHTML">Select Address</a>
+    <a class="btn btn-primary btn-sm btn-default" href="" hx-get="{% url 'book:get_add_address_form' %}" hx-target="#payment_form_container" hx-swap="innerHTML" hx-indicator="#spinner">Add New Address</a>
+    <a class="btn btn-primary btn-sm btn-default" href="" hx-get="{% url 'book:get_select_address_form' order.customer.id %}" hx-target="#payment_form_container" hx-swap="innerHTML" hx-indicator="#spinner">Select Address</a>
+    
     </div>
     <h6>Select Payment Gateway</h6>
     <div class="mb-3">
     {{ payment_gateways_form.as_p }}   
-    </div>   
-
-
- 
+    </div>    
     <input class="btn btn-primary btn-lg btn-default" type="submit" value="Continue"/>
+    <div id="spinner{{order.book_order_items.all.first.item.id}}" class="htmx-indicator">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
    
 </form> 
 

@@ -27,7 +27,7 @@
             <div id = "book{{book.id}}">
                 
                 <h5>Fillup the form below to place the order</h5>
-                <form class="row g-2 justify-content-center align-items-center" hx-post="{{book.get_buy_link}}" hx-target="#book{{book.id}}" hx-swap="innerHTML">
+                <form class="row g-2 justify-content-center align-items-center" hx-post="{{book.get_buy_link}}" hx-target="#book{{book.id}}" hx-swap="innerHTML" hx-indicator="#spinner{{book.id}}">
                     {% csrf_token %}
                     {% if user_form.non_field_errors %} 
                     <div class="text-danger">                                              
@@ -48,7 +48,12 @@
                     {% endfor %}
                     <input type="hidden" name="form_name" value="quantity_form">                         
                     <input class="btn btn-primary btn-lg btn-default" type="submit" value="{% if book.pre_order_open %}Place Pre Order{% else %}Place Order{% endif %}"/>
-     
+
+                    <div id="spinner{{book.id}}" class="htmx-indicator">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                    </div>
                 </form>   
                 <div class="mt-4">  
                     <h5 class="border-bottom">About the Book</h5>

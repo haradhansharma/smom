@@ -2,7 +2,7 @@
 <h3 class="text-primary">Pranami:<small class="fw-light"> {{book.price}} BDT</small></h3>
 {{book.description|safe|truncatechars:150 }}     
 <h5>Fillup the form below to place order:</h5>
-<form class="row g-2 justify-content-center align-items-center" hx-post="{{book.get_buy_link}}" hx-target="#book{{book.id}}" hx-swap="innerHTML">
+<form class="row g-2 justify-content-center align-items-center" hx-post="{{book.get_buy_link}}" hx-target="#book{{book.id}}" hx-swap="innerHTML" hx-indicator="#spinner{{book.id}}">
     {% csrf_token %}
     {% if user_form.non_field_errors %} 
     <div class="text-danger">                                              
@@ -27,5 +27,10 @@
     {% endfor %}
     <input type="hidden" name="form_name" value="quantity_form">                         
     <input class="btn btn-primary btn-lg btn-default" type="submit" value="{% if book.pre_order_open %}Start Pre Order{% else %}Start Order{% endif %}"/>
+    <div id="spinner{{book.id}}" class="htmx-indicator">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </div>
     <a class="btn btn-primary btn-lg btn-default" href="{{book.get_absolute_url}}">Book Details</a>
 </form> 
