@@ -82,6 +82,7 @@ def generate_random_password(length=12):
     return ''.join(random.choice(characters) for _ in range(length))
 
 def get_or_create_user(email, phone):
+    site = site_data()
     try:
         # Check if a user with the same email already exists
         existing_user = User.objects.get(email=email)       
@@ -96,11 +97,13 @@ def get_or_create_user(email, phone):
         user = User.objects.create(username=unique_username, email=email, phone=phone)
         user.set_password(random_password)
         user.save()
+        site_name = site.get('name')
+        domain = site.get('domain')
         
         # Send an email to the user
-        subject = 'SANKARMATH - O - MISSION | Your New Account Information'
+        subject = f'{site_name} | Your New Account Information'
         message =   f'Hello {user.email},\n\n'
-        message +=  f'Your account has been created successfully with an order successfully placed on sincehence.co.uk. \n\n' 
+        message +=  f'Your account has been created successfully with an order successfully placed on {domain}. \n\n' 
         message +=  f'Your initial password is: {random_password}. \n\n' 
         message +=  f'Please change this password! Alternatively you may keep record of this password.\n\n'                     
         message +=  f'Please login to your account and change your password immediately for security reasons.\n\n' 
