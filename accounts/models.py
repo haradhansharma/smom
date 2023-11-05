@@ -124,6 +124,10 @@ class User(AbstractUser):
     def has_address(self):
         return self.user_addresses.all().exists()
     
+    @property
+    def orders(self):
+        return self.user_orders.all()
+    
 class Address(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_addresses')
     

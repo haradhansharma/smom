@@ -22,10 +22,16 @@ class RocketPaymentGateway(PaymentGatewayBase):
         return countries, any
     
     def get_help_text(self):
-        return f'Rocket Manual'
+        return f'Rocket Personal'
     
-    def get_gateway_instruction(self):
-        message = f'This is rocket gateway Message'
+    def get_pay_to(self):
+        return 'Haradhan Sharma'
+    
+    def get_account(self):
+        return '017122708155'
+    
+    def get_gateway_instruction(self, order):
+        message = f'Selected payment gateway is Rocket Personal. In the next screen there will be an invoice and instructions to pay.'
         return message
     
     @property

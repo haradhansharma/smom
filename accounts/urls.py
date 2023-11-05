@@ -21,7 +21,9 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='user_dashboard'), 
     path('changepass/', views.password_change, name='change_pass'),   
     path('delete-avatar/', views.delete_avatar, name='delete_avatar'),     
-    path('add-address/<uuid:id>', views.add_address, name='add_address'),  
+    path('add-address/<uuid:id>', views.add_address, name='add_address'), 
+    path('pending-payments/', views.pending_payments, name='pending_payments'),  
+     
     
 ]
 

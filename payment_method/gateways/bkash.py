@@ -21,11 +21,17 @@ class bKashPaymentGateway(PaymentGatewayBase):
         any = False
         return countries, any
     
-    def get_help_text(self):
-        return f'bKash Manual'
+    def get_help_text(self): 
+        return f'bKash Personal'
     
-    def get_gateway_instruction(self):
-        message = f'This is gateway Message'
+    def get_pay_to(self):
+        return 'Haradhan Sharma'
+    
+    def get_account(self):
+        return '01712270815'
+    
+    def get_gateway_instruction(self, order):
+        message = f'Selected payment gateway is bKash Personal. In the next screen there will be an invoice and instructions to pay.'
         return message
     
     @property

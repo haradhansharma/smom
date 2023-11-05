@@ -1,0 +1,26 @@
+
+<h2 class="card-title">OrderNo: {{order.id}}</h2>
+<h3 class="text-primary">Pending Amount:<small class="fw-light"> {{order.pending_amount}} BDT out of Order Amount {{order.amount}} BDT</small></h3>
+
+<form hx-post="{% url 'book:update_payment' order.id %}" hx-target="#invoice{{order.id}}" hx-swap="innerHTML" hx-encoding="multipart/form-data">
+    {% csrf_token %}   
+    {% if user_form.non_field_errors %} 
+    <div class="text-danger">                                              
+        {{ user_form.non_field_errors }}                                          
+    </div>   
+    {% endif %}  
+    {% for field in payment_form %}
+    <div class="col-12 mb-3">
+        <div class="form-floating text-dark">
+            {{ field }}          
+            <label class="mb-2 text-muted"  for="{{ field.id_for_label }}">{{ field.label }}</label>           
+        </div>
+        {% for error in field.errors %}
+            {{error}}
+        {% endfor %}  
+        <small>{{ field.help_text|safe }}</small>
+    </div>
+    {% endfor %}
+
+    <input class="btn btn-primary btn-lg btn-default" type="submit" value="Place Order"/>   
+</form> 

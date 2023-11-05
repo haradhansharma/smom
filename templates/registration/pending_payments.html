@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block hero %}
+    <header class="masthead2" style="background-image:url('/static/assets/img/intro-bg.jpg');"> 
+            <div class="container">
+                <div class="row d-flex g-3 ">                    
+                    <div class="col-lg-12 mx-auto text-center pt-5">                  
+                      <h1>{{site_data.title}}</h1>
+                    </div>                    
+                </div>
+            </div>
+
+    </header>
+    {% endblock %}
+
+{% block body %}
+
+<section class="p-5 section">
+  <div class="container">
+      <div class="row justify-content-center align-items-center g-3">
+        <p class="text-primary">We need your help to improve this site. Currently we are just starting with the bare minimum. So encourage your loved ones to buy our <a href="/#book">books</a>.</p>
+
+        <form method="get" action="{% url 'accounts:pending_payments' %}">
+            <div class="input-group mb-3">
+              <input type="text" name="search" class="form-control" placeholder="Search by Order Number. EG: 191" value="{{ search_query }}">
+              <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+          </form>
+
+
+            <div class="col-12 mx-auto">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                
+                                <th>Pending Amount</th>
+
+                                <th>Validity</th>
+
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for invoice in invoices %}
+                            <tr>
+                                <td>{{invoice.order.id}}</td>
+                                
+                                <td class="text-danger">{{invoice.order.pending_amount}} BDT</td>
+                                <td>{{invoice.validity.date}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                    <a hx-get="{{invoice.update_payment_url}}" hx-target="#invoice{{invoice.order.id}}" hx-swap="innerHTML" class="btn btn-default">Update Payment</a>
+                                    <a href="{{invoice.filepath.url}}" target="_blank" class="btn btn-default">View Invoice</a>
+                                    </div>
+                                    <div id="invoice{{invoice.order.id}}"></div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+      </div>
+  </div>
+</section>
+
+
+  {% endblock %}
+
+
+
+
+

@@ -1,8 +1,9 @@
+from datetime import date
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from django.utils import timezone
 from book.forms import AddressSelectionForm, QuantityForm
 from book.models import Book
 # from shop.models import Order
@@ -25,6 +26,47 @@ from django.contrib.auth import update_session_auth_hash
 from django.utils.decorators import method_decorator
 from django.core.exceptions import PermissionDenied
 from django.views.generic.edit import CreateView
+
+@login_required
+def pending_payments(request): 
+    site = site_data() 
+    site['title'] = f'Pending Payments'
+    site['description'] = f'Update Payment information and confirm orders!'
+    user = request.user
+    
+    search_query = request.GET.get('search', '')
+    
+
+    invoices = []  
+    for order in user.orders:
+        if order.trans_amount < order.amount:
+            invoice = order.inv if order.inv is not None else None                    
+            if invoice is not None:            
+                if invoice.validity > timezone.now():
+                    invoices.append(invoice)
+           
+     
+
+    
+    
+    if search_query:
+        filtered_list = [invoice for invoice in invoices if invoice.order.id == int(search_query)]   
+    else:
+        filtered_list = invoices
+        
+          
+        
+   
+    context = {
+        'user' : user,    
+        'site_data' : site ,  
+        'invoices' : filtered_list,
+        'search_query': search_query,             
+    }   
+    
+    response = render(request, 'registration/pending_payments.html', context = context)
+    response['X-Robots-Tag'] = 'noindex, nofollow'
+    return response 
 
 @login_required
 def delete_avatar(request):    

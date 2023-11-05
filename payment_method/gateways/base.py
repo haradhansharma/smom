@@ -4,11 +4,17 @@ import sys
 
 class PaymentGatewayBase:
     
+    def get_pay_to(self):
+        raise NotImplementedError("Subclasses must implement get_pay_to method")
+    
+    def get_account(self):
+        raise NotImplementedError("Subclasses must implement get_account method")
+    
     def allowed_amount(self):
-        raise NotImplementedError("Subclasses must implement get_help_text method")
+        raise NotImplementedError("Subclasses must implement allowed_amount method")
     
     def allowed_countries(self):
-        raise NotImplementedError("Subclasses must implement get_help_text method")
+        raise NotImplementedError("Subclasses must implement allowed_countries method")
     
     def get_help_text(self):
         raise NotImplementedError("Subclasses must implement get_help_text method")

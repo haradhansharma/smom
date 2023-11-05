@@ -5,14 +5,12 @@ from django.urls import reverse
 from .base import PaymentGatewayBase
 
 class EximBdPaymentGateway(PaymentGatewayBase):
-    def __init__(self):
-        # Implement the bKash-specific initialization logic here
-        # ...
+    def __init__(self):        
         pass
     
     def allowed_amount(self):
         min = 0
-        max = 99000
+        max = 199000
         any = True
         return min, max, any
     
@@ -24,8 +22,19 @@ class EximBdPaymentGateway(PaymentGatewayBase):
     def get_help_text(self):
         return f'Exin Bank BD'
     
-    def get_gateway_instruction(self):
-        message = f'This is Exim Bank gateway Message'
+    def get_pay_to(self):
+        return 'Haradhan Sharma'
+    
+    def get_account(self):
+        
+        rs = f'0112009414723<br/>'
+        rs += f'Islampur Branch, Dhaka'
+        
+        return rs
+    
+    
+    def get_gateway_instruction(self, order):
+        message = f'Selected payment gateway is Exim Bank Bangladesh Limited. In the next screen there will be an invoice and instructions to pay.'
         return message
     
     @property

@@ -16,6 +16,8 @@ urlpatterns = [
     path('buy/payment/<int:id>/', book_order_payment, name='book_order_payment'),
     path('get-add-address-form/', get_add_address_form, name='get_add_address_form'),
     path('get-select-address-form/<uuid:id>', get_select_address_form, name='get_select_address_form'),
+    path('update-payment/<int:id>', update_payment, name='update_payment'),
+    
     
     
     
