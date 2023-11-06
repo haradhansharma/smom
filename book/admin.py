@@ -1,19 +1,27 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from book.models import Book, BookOrder, BookOrderItem, OrderTransaction
+from book.models import Book, BookOrder, BookOrderItem, Discount, OrderTransaction
 from payment_method.utils import get_payment_method_class
 from payment_method.views import create_pdf_invoice
 from django.utils import timezone
 
+class DiscountInline(admin.TabularInline):
+    model = Discount 
+    fk_name = 'book'   
+    ordering = ('quantity',) 
+
+
 class BookAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
     summernote_fields = ('description',)
     prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'is_active',)
+    list_display = ('title', 'is_active',)    
+    inlines = [DiscountInline]  
 admin.site.register(Book, BookAdmin)
 
 
 class BookOrderItemInline(admin.TabularInline):
     model = BookOrderItem 
+    fk_name = 'order'
     readonly_fields = ('item','sale_price', 'quantity', 'total_amount',)
 
 class BookOrderAdmin(admin.ModelAdmin):

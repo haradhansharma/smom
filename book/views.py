@@ -20,22 +20,20 @@ from django.contrib import messages
 from django.utils import timezone
 
 def home(request):
+    
     template = 'book/home.html'
     books = Book.objects.filter(is_active = True).order_by('-updated_at')    
-    quantity_form = QuantityForm(request=request, book=None)
+    # quantity_form = QuantityForm(request=request, book=None) it is being called from template tag
   
     site = site_data()
     site['title'] = 'All Books'
     
     site['description'] = 'Explore your registered book list - your curated collection of books. Easily manage, track, and organize your literary treasures in one place. Get organized with your reading journey.'
 
-    context = {      
-
+    context = {     
         'site_data' : site,   
         'books' : books,
-        'quantity_form' : quantity_form   
-
-        
+        # 'quantity_form' : quantity_form   
     }  
     
     response = render(request, template, context=context)
@@ -139,12 +137,12 @@ def buy_book(request, id):
                     request.user.save()
                     
                     
-                             
+               
                 user = get_or_create_user(email, phone)              
                     
              
                 order = BookOrder.objects.create(
-                    amount = int(quantity) * book.price,
+                    amount = int(quantity) * book.cal_price(quantity),
                     customer = user,
                     order_status = 'pending'                       
                 )
@@ -152,9 +150,9 @@ def buy_book(request, id):
                 BookOrderItem.objects.create(
                     item = book,
                     order = order,
-                    sale_price = book.price,
+                    sale_price = book.cal_price(quantity),
                     quantity = int(quantity),
-                    total_amount = int(quantity) * book.price,                    
+                    total_amount = int(quantity) * book.cal_price(quantity),                    
                 )
                 return redirect(reverse('book:book_order_payment', args=[int(order.id)]))
                 

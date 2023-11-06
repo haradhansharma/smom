@@ -20,6 +20,34 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True) 
     
+    @property
+    def get_discount_list(self):
+        discounts = self.discounts.all().order_by('quantity').values_list('quantity', 'percent') #sorting is essential or discounts.sort(key=lambda x: x[0])
+        if discounts.exists():
+            return discounts
+        else:
+            return {}
+        
+    
+  
+    def cal_price(self, quantity):
+        discounts = self.get_discount_list       
+        
+        discount_percent = 0.0
+        
+        for tier_quantity, tier_discount in discounts:
+            if int(quantity) >= tier_quantity:
+                discount_percent = tier_discount
+            else:
+                break          
+        
+        
+        discounted_price = self.price - (self.price*int(discount_percent))/100  
+        
+        return discounted_price
+        
+        
+    
     def get_buy_link(self):
         return reverse('book:buy_book', args=[int(self.id)])
     
@@ -34,6 +62,14 @@ class Book(models.Model):
         img_fields = ['main_image']
         
         return img_fields
+    
+class Discount(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='discounts')
+    quantity = models.IntegerField()
+    percent = models.FloatField()
+    
+    def __str__(self):
+        return f'#{self.book}--{self.percent}% for more then {self.percent}'
     
 class BookOrder(models.Model):
     
