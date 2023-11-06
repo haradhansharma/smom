@@ -130,8 +130,11 @@ def buy_book(request, id):
         if form_name == 'quantity_form':
             if quantity_form.is_valid():
                 quantity = quantity_form.cleaned_data['quantity']
-                email = quantity_form.cleaned_data['email']
-                phone = quantity_form.cleaned_data['phone']                
+                 # Use the get method to retrieve email and phone values, defaulting to request.user values
+                email = quantity_form.cleaned_data.get('email', request.user.email)
+                phone = quantity_form.cleaned_data.get('phone', request.user.phone)
+                    
+                             
                 user = get_or_create_user(email, phone)              
                     
              

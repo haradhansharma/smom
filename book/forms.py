@@ -8,14 +8,21 @@ from book.models import OrderTransaction
 
 class QuantityForm(forms.Form):
     quantity = forms.IntegerField(min_value=1, initial=1, required=True, widget=forms.TextInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'e.g.: Enter required Quantity.'}), help_text='Quantity you want to buy. There is quantitywise discounts.', label='Quantity')
-    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'e.g.: example@email.com'}), help_text='Your email address. Using this email will create an account if not exists.', label='Email')
-    phone = PhoneNumberField(required=True, widget= PhoneNumberPrefixWidget(initial='BD', attrs={'placeholder': 'Enter phone number after country code', 'aria-label':'phone_number'}, number_attrs ={'class':'form-control'} , country_attrs={'class': 'input-group-text'}), help_text='Your phone number. Select country code first.', label='Mobile Phone')
+    # email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'e.g.: example@email.com'}), help_text='Your email address. Using this email will create an account if not exists.', label='Email')
+    # phone = PhoneNumberField(required=True, widget= PhoneNumberPrefixWidget(initial='BD', attrs={'placeholder': 'Enter phone number after country code', 'aria-label':'phone_number'}, number_attrs ={'class':'form-control'} , country_attrs={'class': 'input-group-text'}), help_text='Your phone number. Select country code first.', label='Mobile Phone')
     
     def __init__(self, request, book, *args, **kwargs):        
         super(QuantityForm, self).__init__(*args, **kwargs)
         self.book = book
-        self.request = request
+        self.request = request        
         
+        # Check if the user is not logged in
+        if not self.request.user.is_authenticated or (self.request.user.is_authenticated and not self.request.user.email):
+            self.fields['email'] = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control form-control-lg', 'placeholder': 'e.g.: example@email.com'}), help_text='Your email address. Using this email will create an account if not exists.', label='Email')
+
+        if not self.request.user.is_authenticated or (self.request.user.is_authenticated and not self.request.user.phone):
+            self.fields['phone'] = PhoneNumberField(required=True, widget=PhoneNumberPrefixWidget(initial='BD', attrs={'placeholder': 'Enter phone number after country code', 'aria-label': 'phone_number'}, number_attrs={'class': 'form-control'}, country_attrs={'class': 'input-group-text'}), help_text='Your phone number. Select country code first.', label='Mobile Phone')
+            
     def clean_quantity(self):
         from book.views import get_valid_payment_gateways
         quantity = self.cleaned_data.get('quantity')
