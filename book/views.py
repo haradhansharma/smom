@@ -133,6 +133,11 @@ def buy_book(request, id):
                  # Use the get method to retrieve email and phone values, defaulting to request.user values
                 email = quantity_form.cleaned_data.get('email', request.user.email)
                 phone = quantity_form.cleaned_data.get('phone', request.user.phone)
+                
+                if not request.user.phone:
+                    request.user.phone = phone
+                    request.user.save()
+                    
                     
                              
                 user = get_or_create_user(email, phone)              
